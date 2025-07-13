@@ -1,1 +1,1 @@
-# git-profile-analyzsr
+# git-profile-analyzer
