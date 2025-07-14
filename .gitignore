@@ -1,0 +1,20 @@
+# 🐍 Python cache files
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# 🔒 Environment folders
+.env/
+.venv/
+env/
+venv/
+
+# 💻 VS Code & IDE settings
+.vscode/
+.idea/
+
+# 🍏 Mac junk
+.DS_Store
+
+# 📜 Log files
+*.log

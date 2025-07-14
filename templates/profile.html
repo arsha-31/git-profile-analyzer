@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Profile</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        body {
+            background: linear-gradient(to right, #e0c3fc, #8ec5fc);
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+        }
+
+        .profile-card {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #6c5ce7;
+        }
+
+        .repo-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: all 0.2s ease-in-out;
+        }
+
+        .repo-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-btn {
+            margin-top: 20px;
+        }
+
+        h3, h5 {
+            color: #2d3436;
+        }
+    </style>
+</head>
+<body>
+<div class="container py-5">
+
+    {% if error %}
+        <div class="alert alert-danger text-center">
+            {{ error }}
+        </div>
+        <div class="text-center">
+            <a href="/" class="btn btn-secondary mt-3">← Go Back</a>
+        </div>
+    {% else %}
+        <div class="profile-card mx-auto" style="max-width: 800px;">
+            <div class="text-center mb-4">
+                <img src="{{ user.avatar_url }}" class="avatar mb-3" alt="Avatar">
+                <h3>{{ user.name or user.login }}</h3>
+                <p>{{ user.bio or 'No bio available.' }}</p>
+                <a href="{{ user.html_url }}" class="btn btn-dark" target="_blank">View GitHub Profile</a>
+            </div>
+
+            <div class="row text-center mb-4">
+                <div class="col">
+                    <h5>Repos</h5>
+                    <p>{{ user.public_repos }}</p>
+                </div>
+                <div class="col">
+                    <h5>Followers</h5>
+                    <p>{{ user.followers }}</p>
+                </div>
+                <div class="col">
+                    <h5>Following</h5>
+                    <p>{{ user.following }}</p>
+                </div>
+                <div class="col">
+                    <h5>Location</h5>
+                    <p>{{ user.location or "N/A" }}</p>
+                </div>
+            </div>
+
+            <hr>
+
+            <h5 class="mb-3">⭐ Top Repositories</h5>
+            <div class="row">
+                {% for repo in top_repos %}
+                    <div class="col-md-6 mb-3">
+                        <div class="repo-card">
+                            <h6><a href="{{ repo.html_url }}" target="_blank">{{ repo.name }}</a></h6>
+                            <p>{{ repo.description or "No description provided." }}</p>
+                            <span class="badge bg-primary">⭐ {{ repo.stargazers_count }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="text-center back-btn">
+                <a href="/" class="btn btn-outline-secondary">← Back to Home</a>
+            </div>
+        </div>
+    {% endif %}
+
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
