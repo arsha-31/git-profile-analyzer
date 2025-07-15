@@ -26,3 +26,9 @@ h3 {
 .btn-dark {
     margin-top: 10px;
 }
+
+.repo-card small {
+    color: #636e72;
+    display: block;
+    margin-top: 5px;
+}
